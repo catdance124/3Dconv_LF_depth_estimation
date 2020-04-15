@@ -34,9 +34,9 @@ def create_EPI_patch(scene_dir, disp):
             np.save(save_dir / f'{file_num:04}_h.npy', stack_h[:, y*13:y*13+32, x*13:x*13+32])
             np.save(save_dir / f'{file_num:04}_disp.npy', disp[   y*13:y*13+32, x*13:x*13+32])
             file_num += 1
-    np.save(save_dir / 'full_v.npy', stack_v)
-    np.save(save_dir / 'full_h.npy', stack_h)
-    np.save(save_dir / 'full_disp.npy', disp)
+    np.save(save_dir / 'full_v.npy', stack_v[:, :512, :512])
+    np.save(save_dir / 'full_h.npy', stack_h[:, :512, :512])
+    np.save(save_dir / 'full_disp.npy', disp[:512, :512])
     return
 
 def main():
