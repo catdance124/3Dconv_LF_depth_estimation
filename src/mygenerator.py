@@ -8,13 +8,9 @@ class two_input_generator():
         with open(class_list_path) as f:
             reader = csv.reader(f)
             self.classes = np.array([row for row in reader]).flatten()
-        if val_mode:
-            self.data_index = [f'../patch_data/{class_name}/full'
-                                for class_name in self.classes]
-        else:
-            self.data_index = [f'../patch_data/{class_name}/{i:04}'
-                                for i in range(1444)
-                                for class_name in self.classes]
+        self.data_index = [f'../patch_data/{class_name}/{i:04}'
+                            for i in range(1444)
+                            for class_name in self.classes]
     
     def clear(self):
         self.images_h = []
@@ -23,7 +19,8 @@ class two_input_generator():
     
     def flow_from_directory(self, batch_size=64, seed=None):
         while True:
-            np.random.shuffle(self.data_index)
+            if not self.val_mode:
+                np.random.shuffle(self.data_index)
             for target_index in self.data_index:
                 self.images_h.append(np.load(f'{target_index}_h.npy'))
                 self.images_v.append(np.load(f'{target_index}_v.npy'))
