@@ -11,8 +11,8 @@ K.set_session(sess)
 # -----------------------------------------
 
 def conv3D_branch(x):
+    x = Lambda(lambda x: x - K.mean(x, axis=(0,1,2,3)))(x)
     x = ZeroPadding3D(padding=(0, 4, 4))(x)
-    x = Lambda(lambda x: x - K.mean(x))(x)
     x = Conv3D(32, kernel_size=3, padding='valid', activation='relu', kernel_initializer='glorot_uniform')(x)
     x = Conv3D(64, kernel_size=3, padding='valid', activation='relu', kernel_initializer='glorot_uniform')(x)
     x = Conv3D(64, kernel_size=3, padding='valid', activation='relu', kernel_initializer='glorot_uniform')(x)
