@@ -25,7 +25,7 @@ def main():
 
     # callbacks
     output = pathlib.Path('../output').mkdir(exist_ok=True)
-    cp = ModelCheckpoint(filepath = '../output/model.h5', monitor='val_acc',
+    cp = ModelCheckpoint(filepath = '../output/model.h5', monitor='val_loss',
             save_best_only=True, save_weights_only=False, verbose=0,  mode='auto')
     ph = PlotHistory(save_interval=1, dir_name='../output', csv_output=True)
     ## learning rate
