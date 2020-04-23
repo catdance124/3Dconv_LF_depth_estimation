@@ -1,10 +1,13 @@
 import pathlib
 from keras.optimizers import Adam, SGD
 from keras.callbacks import ModelCheckpoint, EarlyStopping, LearningRateScheduler, ReduceLROnPlateau
+
 # my modules
 from model import build_model
 from mygenerator import two_input_generator
 from plot_history import PlotHistory
+from show_fig import show
+
 
 def main():
     # define model
@@ -13,8 +16,8 @@ def main():
 
     # compile
     lr = 0.0005
-    optimizer = SGD(lr=lr)
-    model.compile(optimizer=optimizer, loss="mse", metrics=["accuracy"])
+    optimizer = Adam(lr=lr)
+    model.compile(optimizer=optimizer, loss='mean_absolute_error') #, metrics=["mae"])
 
     # data generator
     train_datagen = two_input_generator('../patch_data/train_data.txt')
@@ -28,8 +31,8 @@ def main():
     ## learning rate
     def step_decay(epoch):
         return lr * 0.95 ** (epoch // 30)
-    lr_decay = LearningRateScheduler(step_decay,verbose=1)
-    cbs = [cp, ph, lr_decay]
+    lr_decay = LearningRateScheduler(step_decay, verbose=1)
+    cbs = [cp, ph, lr_decay, show()]
 
     # START training
     batch_size = 64

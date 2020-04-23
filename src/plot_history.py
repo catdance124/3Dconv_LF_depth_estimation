@@ -35,10 +35,10 @@ class PlotHistory(Callback):
 
     def on_epoch_end(self, epoch, logs=None):
         self.history['loss'].append(logs.get('loss'))
-        self.history['acc'].append(logs.get('acc'))
+        self.history['acc'].append(1)
         if self.do_validation:
             self.history['val_loss'].append(logs.get('val_loss'))
-            self.history['val_acc'].append(logs.get('val_acc'))
+            self.history['val_acc'].append(1)
         if (epoch-1) % self.interval == 0:
             plot_history(history=self.history, dir_name=self.dir_name, csv_output=self.csv_output, title=self.title)
 
