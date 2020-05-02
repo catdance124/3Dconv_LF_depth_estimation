@@ -5,7 +5,7 @@ from keras.models import Model
 import tensorflow as tf
 from keras import backend as K
 config = tf.ConfigProto()
-config.gpu_options.per_process_gpu_memory_fraction = 0.8
+config.gpu_options.per_process_gpu_memory_fraction = 0.5
 sess = tf.Session(config=config)
 K.set_session(sess)
 # -----------------------------------------
