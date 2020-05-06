@@ -30,4 +30,4 @@ class two_input_generator():
                     images_batch_v = np.array(self.images_v, dtype=np.float32)
                     images_batch_disp = np.array(self.images_disp, dtype=np.float32)
                     self.clear()
-                    yield [images_batch_h, images_batch_v], images_batch_disp+10
+                    yield [images_batch_h, images_batch_v], images_batch_disp+1
