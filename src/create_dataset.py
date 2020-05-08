@@ -9,20 +9,19 @@ full_data_root = pathlib.Path('../full_data')
 patch_data_root = pathlib.Path('../patch_data')
 
 def create_EPI_patch(scene_dir, disp):
-    stack_v = np.zeros((9, 513, 513, 3), dtype=np.uint8)
-    stack_h = np.zeros((9, 513, 513, 3), dtype=np.uint8)
-    # vertical
-    for i, image_path in enumerate([scene_dir / f'input_Cam{i:03}.png' for i in range(4, 81, 9)]):
-        img = np.asarray(Image.open(image_path))
-        stack_v[i, :512, :512] = img
-        stack_v[i, 512] = stack_v[i, 511]
-        stack_v[i, :, 512] = stack_v[i, :, 511]
-    # horizontal
-    for i, image_path in enumerate([scene_dir / f'input_Cam{i:03}.png' for i in range(36, 45)]):
-        img = np.asarray(Image.open(image_path))
-        stack_h[i, :512, :512] = img
-        stack_h[i, 512] = stack_h[i, 511]
-        stack_h[i, :, 512] = stack_h[i, :, 511]
+    # stack EPI func
+    def stack_EPI(start, end, step):
+        target_arr = np.zeros((9, 513, 513, 3), dtype=np.uint8)
+        for i, image_path in enumerate([scene_dir / f'input_Cam{i:03}.png' for i in range(start, end, step)]):
+            img = np.asarray(Image.open(image_path))
+            target_arr[i, :512, :512] = img
+            target_arr[i, 512] = target_arr[i, 511]
+            target_arr[i, :, 512] = target_arr[i, :, 511]
+        return target_arr
+    
+    # stack EPI
+    stack_v = stack_EPI(4, 81, 9)
+    stack_h = stack_EPI(36, 45, 1)
     
     # save binary
     save_dir = patch_data_root / scene_dir.name
