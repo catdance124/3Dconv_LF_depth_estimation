@@ -17,7 +17,7 @@ class show(keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs={}):
         decoded_imgs = self.model.predict(self.tests, verbose=2)
         plt.grid(False)
-        plt.imshow(decoded_imgs[0])
+        plt.imshow(decoded_imgs[0]-5)
         plt.savefig(f'{self.output_dir}/fig/figure_{epoch:06}.png')
     
     # def on_batch_end(self, batch, logs={}):
