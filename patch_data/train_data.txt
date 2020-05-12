@@ -4,12 +4,12 @@ dishes
 greek
 museum
 platonic
-table
 tomb
 tower
-vinyl
 backgammon
 stripes
 boxes
 dino
 sideboard
+rosemary
+pens
