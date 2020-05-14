@@ -15,11 +15,12 @@ class show(keras.callbacks.Callback):
         pathlib.Path(f'{self.output_dir}/fig').mkdir(exist_ok=True, parents=True)
 
     def on_epoch_end(self, epoch, logs={}):
-        decoded_imgs = self.model.predict(self.tests, verbose=2)
+        decoded_imgs = self.model.predict(self.tests, verbose=2)[0]-5
         plt.title(f'epoch:{epoch:03}')
         plt.grid(False)
-        plt.imshow(decoded_imgs[0]-5)
-        plt.savefig(f'{self.output_dir}/fig/figure_{epoch:06}.png')
+        plt.imshow(decoded_imgs, vmin=-1.6, vmax=1.6)
+        plt.savefig(f'{self.output_dir}/fig/{epoch:06}.png')
+        np.save(f'{self.output_dir}/npy/{epoch:06}.npy', decoded_imgs[0])
     
     # def on_batch_end(self, batch, logs={}):
     #     decoded_imgs = self.model.predict(self.tests, verbose=2)
