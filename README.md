@@ -18,6 +18,7 @@ Please set up the file structure as follows.
   ┃     ┣━━ stratified/
   ┃     ┣━━ test/
   ┃     ┗━━ training/
+  ┣━━ plot_result.py    ...    the script to create the figure below
   ┗━━ README.md    ...    this document
 ```
 
@@ -35,8 +36,16 @@ python train.py
 
 ## result
 The predicts for each epoch are placed here.  
-output/YYYY-MM-DD_HHmm/fig/figure_*.png  
-![](predicts.gif)
+output/YYYY-MM-DD_HHmm/fig/{epoch}.png  
+  
+The following figure was created by [plot_result.py](./plot_result.py).
+```
+# Rewrite the output_dir variable.
+python plot_result.py
+# save to output/YYYY-MM-DD_HHmm/result/{epoch}.png  
+```
+
+![](result.gif)
 
 ## model architecture
 ![](model_plot.png)
