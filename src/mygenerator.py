@@ -26,8 +26,8 @@ class two_input_generator():
                 self.images_v.append(np.load(f'{target_index}_v.npy'))
                 self.images_disp.append(np.load(f'{target_index}_disp.npy'))
                 if len(self.images_h) == batch_size:
-                    images_batch_h = np.array(self.images_h, dtype=np.float32)
-                    images_batch_v = np.array(self.images_v, dtype=np.float32)
+                    images_batch_h = np.array(self.images_h, dtype=np.float32) / 255.0
+                    images_batch_v = np.array(self.images_v, dtype=np.float32) / 255.0
                     images_batch_disp = np.array(self.images_disp, dtype=np.float32)
                     self.clear()
                     yield [images_batch_h, images_batch_v], images_batch_disp+5
