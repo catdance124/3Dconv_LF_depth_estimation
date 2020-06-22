@@ -13,6 +13,7 @@ class show(keras.callbacks.Callback):
                         np.load('../patch_data/town/full_v.npy')[np.newaxis] / 255.0]
         self.output_dir = output_dir
         pathlib.Path(f'{self.output_dir}/fig').mkdir(exist_ok=True, parents=True)
+        pathlib.Path(f'{self.output_dir}/npy').mkdir(exist_ok=True, parents=True)
 
     def on_epoch_end(self, epoch, logs={}):
         decoded_imgs = self.model.predict(self.tests, verbose=2)[0]
@@ -21,7 +22,3 @@ class show(keras.callbacks.Callback):
         plt.imshow(decoded_imgs, vmin=-1.6, vmax=1.6)
         plt.savefig(f'{self.output_dir}/fig/{epoch:06}.png')
         np.save(f'{self.output_dir}/npy/{epoch:06}.npy', decoded_imgs)
-    
-    # def on_batch_end(self, batch, logs={}):
-    #     decoded_imgs = self.model.predict(self.tests, verbose=2)
-    #     print(decoded_imgs[0,50:80,50:80])
