@@ -10,14 +10,14 @@ from matplotlib.colors import Normalize
 import matplotlib.gridspec as gridspec
 
 
-output_dir = './output/2020-05-12_2238/'
+output_dir = './output/2020-06-22_1311/'
 df = pd.read_csv(f'{output_dir}/history.csv')
 df = df[['loss', 'val_loss']]
 
 disp = np.load(f'./patch_data/town/full_disp.npy')
 
 for i in range(296):
-    pred = np.load(f'{output_dir}/npy/{i:06}.npy')-5
+    pred = np.load(f'{output_dir}/npy/{i:06}.npy')
     
     plt.figure(figsize=(12,8))
     gs = gridspec.GridSpec(2,3)

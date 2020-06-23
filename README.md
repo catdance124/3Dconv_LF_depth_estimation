@@ -38,11 +38,12 @@ python train.py
 The predicts for each epoch are placed here.  
 output/YYYY-MM-DD_HHmm/fig/{epoch}.png  
   
-The following figure was created by [plot_result.py](./plot_result.py).
+Each frame of the following figure was created by [plot_result.py](./plot_result.py).  
+I used [Giam](http://furumizo.net/tsu/giamd.htm) to connect each frame and created the following figure.  
 ```
-# Rewrite the output_dir variable.
-python plot_result.py
-# save to output/YYYY-MM-DD_HHmm/result/{epoch}.png  
+# after rewrite the output_dir variable in ./plot_result.py
+python ./plot_result.py
+# save to ./output/YYYY-MM-DD_HHmm/result/{epoch}.png  
 ```
 
 ![](result.gif)
