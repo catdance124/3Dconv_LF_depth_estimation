@@ -1,6 +1,11 @@
 # 3Dconv_LF_depth_estimation
 implementation (using keras) of ( Faluvégi, Ágota, et al. "A 3D Convolutional Neural Network for Light Field Depth Estimation." 2019 International Conference on 3D Immersion (IC3D). IEEE, 2019.)
 
+## Implementation env
+- Python 3.6.5
+- Keras==2.2.2
+- tensorflow-gpu==1.10.0
+
 ## To run
 Download light field dataset (from https://lightfield-analysis.uni-konstanz.de/).  
 
