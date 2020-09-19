@@ -2,9 +2,21 @@
 implementation (using keras) of ( Faluvégi, Ágota, et al. "A 3D Convolutional Neural Network for Light Field Depth Estimation." 2019 International Conference on 3D Immersion (IC3D). IEEE, 2019.)
 
 ## Implementation env
-- Python 3.6.5
-- Keras==2.2.2
-- tensorflow-gpu==1.10.0
+- Python 3.7.7
+- tensorflow==2.3.0
+- Keras==2.4.3
+
+```
+conda create -n LF_3Dconv python=3.7 anaconda
+conda activate LF_3Dconv
+```
+
+```
+pip install tensorflow==2.3.0 keras==2.4.3
+```
+
+The source code for the tensorflow 1.X can be found here.  
+https://github.com/catdance124/3Dconv_LF_depth_estimation/tree/1a9a17496fab37cd3ccb237156a78f5cc308e725
 
 ## To run
 Download light field dataset (from https://lightfield-analysis.uni-konstanz.de/).  
@@ -27,16 +39,20 @@ Please set up the file structure as follows.
   ┗━━ README.md    ...    this document
 ```
 
+clone this repo
+```
+git clone https://github.com/catdance124/3Dconv_LF_depth_estimation.git
+cd 3Dconv_LF_depth_estimation/src
+```
+
 Create patch dataset(The first time only.)  
 ```
-cd src
-python create_dataset.py
+python ./create_dataset.py
 ```
 
 Start training
 ```
-cd src
-python train.py
+python ./train.py
 ```
 
 ## result

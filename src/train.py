@@ -1,11 +1,10 @@
 import pathlib, datetime
-from keras.optimizers import Adam, SGD
-from keras.callbacks import ModelCheckpoint, EarlyStopping, LearningRateScheduler, ReduceLROnPlateau
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.callbacks import ModelCheckpoint, LearningRateScheduler, CSVLogger
 
 # my modules
 from model import build_model
 from mygenerator import two_input_generator
-from plot_history import PlotHistory
 from show_fig import show
 
 
@@ -29,12 +28,12 @@ def main():
     output.mkdir(exist_ok=True, parents=True)
     cp = ModelCheckpoint(filepath = f'{output}/model.h5', monitor='val_loss',
             save_best_only=True, save_weights_only=False, verbose=0,  mode='auto')
-    ph = PlotHistory(save_interval=1, dir_name=f'{output}', csv_output=True)
+    logger = CSVLogger(f'{output}/history.csv')
     ## learning rate
     def step_decay(epoch):
         return lr * 0.95 ** (epoch // 30)
     lr_decay = LearningRateScheduler(step_decay, verbose=1)
-    cbs = [cp, ph, lr_decay, show(output)]
+    cbs = [cp, logger, lr_decay, show(output)]
 
     # START training
     batch_size = 64

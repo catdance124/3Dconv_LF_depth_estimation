@@ -1,14 +1,6 @@
-from keras.layers import Input, Conv2D, Conv3D, ZeroPadding3D, Lambda, Concatenate
-from keras.models import Model
-
-# GPU memory settings----------------------
-import tensorflow as tf
-from keras import backend as K
-config = tf.ConfigProto()
-config.gpu_options.per_process_gpu_memory_fraction = 0.8
-sess = tf.Session(config=config)
-K.set_session(sess)
-# -----------------------------------------
+from tensorflow.keras.layers import Input, Conv2D, Conv3D, ZeroPadding3D, Lambda, Concatenate
+from tensorflow.keras.models import Model
+from tensorflow.keras import backend as K
 
 def conv3D_branch(x):
     x = Lambda(lambda x: x - K.mean(x, axis=(0,1,2,3)))(x)
